@@ -1,0 +1,46 @@
+body {
+    font-family: Arial;
+    text-align: center;
+    background-color: #2c3e50;
+    color: white;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.opponent, .player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center {
+    display: flex;
+    gap: 50px;
+}
+
+#discardPile, #drawPile {
+    width: 100px;
+    height: 150px;
+    background-color: white;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+#playerCards {
+    display: flex;
+    gap: 10px;
+}
+
+.card-img {
+    width: 80px;
+    height: auto;
+    cursor: pointer;
+}

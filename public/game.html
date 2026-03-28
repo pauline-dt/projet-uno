@@ -2,18 +2,41 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeu UNO</title>
+    <title>UNO</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Partie UNO</h1>
+
+    <h1>UNO</h1>
     <p id="welcomeMessage"></p>
 
-    <div>
-        <h2>Zone du jeu</h2>
-        <p>Ici s'affichera la partie</p>
+    <div class="game-container">
+
+        <!-- Adversaire -->
+        <div class="opponent">
+            <h2>Adversaire</h2>
+            <div id="opponentCards">Cartes: 7</div>
+        </div>
+
+        <!-- Centre -->
+        <div class="center">
+            <div id="discardPile">Carte centrale</div>
+            <div id="drawPile">Pioche</div>
+        </div>
+
+        <!-- Joueur -->
+        <div class="player">
+            <h2>Ta main</h2>
+            <div id="playerCards"></div>
+        </div>
+
+        <!-- Message -->
+        <div id="gameMessage"></div>
+
     </div>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script src="js/game.js"></script>
+
 </body>
 </html>
