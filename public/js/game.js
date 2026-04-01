@@ -1,4 +1,4 @@
-// ===== PSEUDO =====
+// pseudo
 const pseudo = localStorage.getItem("pseudo");
 const welcomeMessage = document.getElementById("welcomeMessage");
 
@@ -8,13 +8,13 @@ if (pseudo) {
     window.location.href = "login.html";
 }
 
-// ===== DOM =====
+// dom
 const playerCardsDiv = document.getElementById("playerCards");
 const opponentCardsDiv = document.getElementById("opponentCards");
 const discardPileDiv = document.getElementById("discardPile");
 const drawPileDiv = document.getElementById("drawPile");
 
-// ===== CONFIG COULEURS =====
+// couleurs
 const couleurs = [
     { dossier: "bleus", nomFichier: "Bleu" },
     { dossier: "rouges", nomFichier: "Rouge" },
@@ -22,9 +22,7 @@ const couleurs = [
     { dossier: "jaunes", nomFichier: "Jaune" }
 ];
 
-// ===== FONCTIONS UNO =====
-
-// créer le deck
+// fonctions
 function creerDeck() {
     const deck = [];
 
@@ -41,7 +39,6 @@ function creerDeck() {
     return deck;
 }
 
-// mélanger
 function melanger(deck) {
     for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -49,7 +46,6 @@ function melanger(deck) {
     }
 }
 
-// distribuer
 function distribuer(deck) {
     const joueur = deck.splice(0, 7);
     const adversaire = deck.splice(0, 7);
@@ -58,50 +54,92 @@ function distribuer(deck) {
     return { joueur, adversaire, carteCentrale, deck };
 }
 
-// ===== LANCEMENT =====
+function estCarteJouable(carte, carteCentrale) {
+    return (
+        carte.couleur === carteCentrale.couleur ||
+        carte.valeur === carteCentrale.valeur
+    );
+}
+
+// partie
 const deck = creerDeck();
 melanger(deck);
 
 const partie = distribuer(deck);
 
-// ===== AFFICHAGE =====
-
-// joueur
-playerCardsDiv.innerHTML = "";
-
-partie.joueur.forEach((carte) => {
-    const img = document.createElement("img");
-    img.src = carte.image;
-    img.classList.add("card-img");
-    img.alt = "Carte UNO";
-    playerCardsDiv.appendChild(img);
-});
-
-// adversaire
-opponentCardsDiv.innerHTML = "";
-
-for (let i = 0; i < partie.adversaire.length; i++) {
-    const img = document.createElement("img");
-    img.src = "assets/cards/UNO_others/Verso.png";
-    img.classList.add("card-img");
-    img.alt = "Carte adversaire";
-    opponentCardsDiv.appendChild(img);
+// affichage
+function afficherJeu() {
+    afficherMainJoueur();
+    afficherAdversaire();
+    afficherCarteCentrale();
+    afficherPioche();
 }
 
-// carte centrale
-discardPileDiv.innerHTML = "";
+function afficherMainJoueur() {
+    playerCardsDiv.innerHTML = "";
 
-const centerCard = document.createElement("img");
-centerCard.src = partie.carteCentrale.image;
-centerCard.classList.add("card-img");
-centerCard.alt = "Carte centrale";
-discardPileDiv.appendChild(centerCard);
+    partie.joueur.forEach((carte, index) => {
+        const img = document.createElement("img");
+        img.src = carte.image;
+        img.classList.add("card-img");
+        img.alt = "Carte UNO";
 
-// pioche
-drawPileDiv.innerHTML = "";
+        img.addEventListener("click", () => {
+            jouerCarte(index);
+        });
 
-const drawCard = document.createElement("img");
-drawCard.src = "assets/cards/UNO_others/Verso.png";
-drawCard.classList.add("card-img");
-drawCard.alt = "Pioche";
-drawPileDiv.appendChild(drawCard);
+        playerCardsDiv.appendChild(img);
+    });
+}
+
+function afficherAdversaire() {
+    opponentCardsDiv.innerHTML = "";
+
+    for (let i = 0; i < partie.adversaire.length; i++) {
+        const img = document.createElement("img");
+        img.src = "assets/cards/UNO_others/Verso.png";
+        img.classList.add("card-img");
+        img.alt = "Carte adversaire";
+        opponentCardsDiv.appendChild(img);
+    }
+}
+
+function afficherCarteCentrale() {
+    discardPileDiv.innerHTML = "";
+
+    const centerCard = document.createElement("img");
+    centerCard.src = partie.carteCentrale.image;
+    centerCard.classList.add("card-img");
+    centerCard.alt = "Carte centrale";
+    discardPileDiv.appendChild(centerCard);
+}
+
+function afficherPioche() {
+    drawPileDiv.innerHTML = "";
+
+    const drawCard = document.createElement("img");
+    drawCard.src = "assets/cards/UNO_others/Verso.png";
+    drawCard.classList.add("card-img");
+    drawCard.alt = "Pioche";
+    drawPileDiv.appendChild(drawCard);
+}
+
+// actions
+function jouerCarte(index) {
+    const carteChoisie = partie.joueur[index];
+
+    if (estCarteJouable(carteChoisie, partie.carteCentrale)) {
+        partie.carteCentrale = carteChoisie;
+        partie.joueur.splice(index, 1);
+        afficherJeu();
+
+        if (partie.joueur.length === 0) {
+            alert("Bravo, tu as gagné !");
+        }
+    } else {
+        alert("Cette carte ne peut pas être jouée.");
+    }
+}
+
+// lancement
+afficherJeu();
