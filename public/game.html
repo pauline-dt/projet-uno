@@ -2,41 +2,45 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>UNO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNO - Jeu</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
     <h1>UNO</h1>
     <p id="welcomeMessage"></p>
 
-    <div class="game-container">
-
-        <!-- Adversaire -->
-        <div class="opponent">
-            <h2>Adversaire</h2>
-            <div id="opponentCards">Cartes: 7</div>
+    <div class="game-board">
+        <div class="opponent-zone">
+            <h2 id="opponentName">Adversaire</h2>
+            <div id="opponentCards" class="cards-container"></div>
         </div>
 
-        <!-- Centre -->
-        <div class="center">
-            <div id="discardPile">Carte centrale</div>
-            <div id="drawPile">Pioche</div>
+        <div class="center-zone">
+            <div class="pile-block">
+                <h3>Carte centrale</h3>
+                <div id="discardPile" class="pile"></div>
+                <p id="activeColor"></p>
+            </div>
+
+            <div class="pile-block">
+                <h3>Pioche</h3>
+                <div id="drawPile" class="pile"></div>
+            </div>
         </div>
 
-        <!-- Joueur -->
-        <div class="player">
+        <div class="action-buttons">
+            <button id="unoButton">UNO</button>
+            <button id="challengeUnoButton">Contre UNO</button>
+        </div>
+
+        <div class="player-zone">
             <h2>Ta main</h2>
-            <div id="playerCards"></div>
+            <div id="playerCards" class="cards-container"></div>
         </div>
-
-        <!-- Message -->
-        <div id="gameMessage"></div>
-
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/game.js"></script>
-
 </body>
 </html>

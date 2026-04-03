@@ -1,6 +1,6 @@
 const form = document.getElementById("loginForm");
 
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const pseudo = document.getElementById("pseudo").value.trim();
