@@ -4,15 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - UNO</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <h1>Connexion</h1>
+<body class="login-page">
+    <div class="login-background">
+        <div class="login-overlay"></div>
 
-    <form id="loginForm">
-        <label for="pseudo">Pseudo :</label>
-        <input type="text" id="pseudo" name="pseudo" required>
-        <button type="submit">Valider</button>
-    </form>
+        <div class="login-card">
+            <div class="login-badge">ACCÈS JOUEUR</div>
+
+            <h1 class="login-title">Connexion</h1>
+            <p class="login-subtitle">
+                Entre ton pseudo pour rejoindre une partie de UNO en temps réel.
+            </p>
+
+            <form id="loginForm" class="login-form">
+                <input
+                    type="text"
+                    id="pseudo"
+                    placeholder="Ton pseudo"
+                    required
+                    maxlength="20"
+                >
+                <button type="submit" class="login-button">Entrer dans la partie</button>
+            </form>
+
+            <div class="login-cards-preview">
+                <img src="assets/cards/UNO_jaunes/7 Jaune.png" alt="Carte jaune" class="login-preview-card login-card-left">
+                <img src="assets/cards/UNO_others/Change couleur.png" alt="Carte joker" class="login-preview-card login-card-center">
+                <img src="assets/cards/UNO_rouges/+2 Rouge.png" alt="Carte rouge" class="login-preview-card login-card-right">
+            </div>
+        </div>
+    </div>
 
     <script src="js/login.js"></script>
 </body>
