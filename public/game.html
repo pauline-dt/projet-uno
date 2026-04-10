@@ -6,38 +6,42 @@
     <title>UNO - Jeu</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <h1>UNO</h1>
-    <p id="welcomeMessage"></p>
+<body class="game-page-v2">
+    <div class="game-shell-v2">
+        <header class="game-header-v2">
+            <h1 class="game-title-v2">UNO</h1>
+            <p id="welcomeMessage" class="game-welcome-v2"></p>
+        </header>
 
-    <div class="game-board">
-        <div class="opponent-zone">
-            <h2 id="opponentName">Adversaire</h2>
-            <div id="opponentCards" class="cards-container"></div>
-        </div>
+        <main class="game-board game-board-v2">
+            <section class="opponent-zone opponent-zone-v2">
+                <h2 id="opponentName" class="zone-title-v2">Adversaire</h2>
+                <div id="opponentCards" class="cards-container cards-opponent-v2"></div>
+            </section>
 
-        <div class="center-zone">
-            <div class="pile-block">
-                <h3>Carte centrale</h3>
-                <div id="discardPile" class="pile"></div>
-                <p id="activeColor"></p>
-            </div>
+            <section class="center-zone center-zone-v2">
+                <div class="pile-block pile-block-v2">
+                    <h3>Carte centrale</h3>
+                    <div id="discardPile" class="pile pile-v2"></div>
+                    <p id="activeColor" class="active-color-v2"></p>
+                </div>
 
-            <div class="pile-block">
-                <h3>Pioche</h3>
-                <div id="drawPile" class="pile"></div>
-            </div>
-        </div>
+                <div class="pile-block pile-block-v2">
+                    <h3>Pioche</h3>
+                    <div id="drawPile" class="pile pile-v2"></div>
+                </div>
+            </section>
 
-        <div class="action-buttons">
-            <button id="unoButton">UNO</button>
-            <button id="challengeUnoButton">Contre UNO</button>
-        </div>
+            <section class="action-buttons action-buttons-v2">
+                <button id="unoButton">UNO</button>
+                <button id="challengeUnoButton">Contre UNO</button>
+            </section>
 
-        <div class="player-zone">
-            <h2>Ta main</h2>
-            <div id="playerCards" class="cards-container"></div>
-        </div>
+            <section class="player-zone player-zone-v2">
+                <h2 class="zone-title-v2">Ta main</h2>
+                <div id="playerCards" class="cards-container cards-player-v2"></div>
+            </section>
+        </main>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
