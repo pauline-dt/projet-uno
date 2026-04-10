@@ -287,29 +287,30 @@ io.on("connection", (socket) => {
             return;
         }
 
-        switch (carteChoisie.type) {
-            case "draw2":
-                piocherCartes(adversaire, 2);
-                partie.tour = joueur.id;
-                break;
+        
+    switch (carteChoisie.type) {
+        case "draw2":
+            piocherCartes(adversaire, 2);
+            partie.tour = adversaire.id;
+            break;
 
-            case "draw4":
-                piocherCartes(adversaire, 4);
-                partie.tour = joueur.id;
-                break;
+        case "draw4":
+            piocherCartes(adversaire, 4);
+            partie.tour = adversaire.id;
+            break;
 
-            case "skip":
-                partie.tour = joueur.id;
-                break;
+        case "skip":
+            partie.tour = joueur.id;
+            break;
 
-            case "reverse":
-                partie.tour = joueur.id;
-                break;
+        case "reverse":
+            partie.tour = joueur.id;
+            break;
 
-            default:
-                partie.tour = adversaire.id;
-                break;
-        }
+        default:
+            partie.tour = adversaire.id;
+            break;
+}
 
         envoyerEtatATous();
     });
