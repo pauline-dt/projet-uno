@@ -637,3 +637,71 @@ input {
     color: white !important;
     margin-top: 4px !important;
 }
+
+.color-picker-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.color-picker-modal.hidden {
+    display: none;
+}
+
+.color-picker-box {
+    background: rgba(35, 53, 74, 0.96);
+    border-radius: 20px;
+    padding: 24px 20px;
+    min-width: 320px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    text-align: center;
+}
+
+.color-picker-box h3 {
+    margin: 0 0 18px 0;
+    color: white;
+    font-size: 1.3rem;
+}
+
+.color-picker-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.color-choice {
+    border: none;
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-weight: 800;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.color-choice:hover {
+    transform: scale(1.04);
+    filter: brightness(1.05);
+}
+
+.color-choice.blue {
+    background: linear-gradient(135deg, #24c6dc, #2f80ed);
+}
+
+.color-choice.red {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
+.color-choice.green {
+    background: linear-gradient(135deg, #56ab2f, #a8e063);
+}
+
+.color-choice.yellow {
+    background: linear-gradient(135deg, #f7971e, #ffd200);
+    color: #2b2b2b;
+}

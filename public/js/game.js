@@ -18,7 +18,11 @@ const drawPileDiv = document.getElementById("drawPile");
 const unoButton = document.getElementById("unoButton");
 const challengeUnoButton = document.getElementById("challengeUnoButton");
 
+const colorPickerModal = document.getElementById("colorPickerModal");
+const colorChoiceButtons = document.querySelectorAll(".color-choice");
+
 let etatJeu = null;
+let pendingWildCardIndex = null;
 
 socket.emit("joinGame", pseudo);
 
@@ -56,6 +60,21 @@ challengeUnoButton.addEventListener("click", () => {
     socket.emit("challengeUno");
 });
 
+colorChoiceButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        if (pendingWildCardIndex === null) return;
+
+        const chosenColor = button.dataset.color;
+
+        socket.emit("playCard", {
+            index: pendingWildCardIndex,
+            chosenColor
+        });
+
+        fermerColorPicker();
+    });
+});
+
 function afficherJeu() {
     if (!etatJeu) return;
 
@@ -83,32 +102,19 @@ function afficherMainJoueur() {
         img.addEventListener("click", () => {
             if (etatJeu.finDePartie) return;
 
-            if (!etatJeu.monTour) {
+           if (!etatJeu.monTour) {
                 alert("Ce n'est pas ton tour.");
                 return;
             }
 
-            let chosenColor = null;
-
             if (carte.type === "wild" || carte.type === "draw4") {
-                const choix = prompt("Choisis une couleur : bleu, rouge, vert ou jaune");
-                if (!choix) return;
-
-                const valeur = choix.trim().toLowerCase();
-
-                if (valeur === "bleu") chosenColor = "bleus";
-                else if (valeur === "rouge") chosenColor = "rouges";
-                else if (valeur === "vert") chosenColor = "verts";
-                else if (valeur === "jaune") chosenColor = "jaunes";
-                else {
-                    alert("Couleur invalide.");
-                    return;
-                }
+                ouvrirColorPicker(index);
+                return;
             }
 
             socket.emit("playCard", {
                 index,
-                chosenColor
+                chosenColor: null
             });
         });
 
@@ -192,4 +198,14 @@ function formatCouleur(couleur) {
     if (couleur === "verts") return "Vert";
     if (couleur === "jaunes") return "Jaune";
     return "";
+}
+
+function ouvrirColorPicker(index) {
+    pendingWildCardIndex = index;
+    colorPickerModal.classList.remove("hidden");
+}
+
+function fermerColorPicker() {
+    pendingWildCardIndex = null;
+    colorPickerModal.classList.add("hidden");
 }
